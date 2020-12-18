@@ -1,0 +1,170 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>맥도날드 동작구</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Gothic&display=swap" rel="stylesheet">
+        <style>
+            .title>p{
+                font-family: 'Black Han Sans', sans-serif;
+                font-size : 50px;
+                margin : 10px 0;
+            }
+            .menu-item >p{
+                font-family:  'Black Han Sans', sans-serif;
+                font-size : 25px;
+            }
+            .menuImgUI{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                list-style : none; 
+                margin : 20px 0px;
+                padding : 0px;
+            }
+            .menu-item{
+                display :inline-block;
+            }
+            .order{
+                font-family:  'Nanum Gothic', sans-serif;
+            }
+            hr{
+                width : 100%;
+                border-bottom : 0;
+                color : gray;
+            }
+            .orderform{
+                display:grid;
+                grid-template-rows : 1fr 1fr 1fr;
+            }
+            
+            .realform>select{
+                font-family:  'Nanum Gothic', sans-serif;
+                cursor : pointer;
+                color:orangered;
+            }
+            .realform>input{
+                font-family:  'Nanum Gothic', sans-serif;
+                color:orangered;
+            }
+            .realform{
+                grid-row:1;
+            }
+            .addmenu{
+                grid-row:2;
+            }
+            .addmenu>select{
+                font-family:  'Nanum Gothic', sans-serif;
+                cursor : pointer;
+                color:orangered;
+            }
+            .addmenu>input{
+                font-family:  'Nanum Gothic', sans-serif;
+                color:orangered;
+            }
+            .submitform{
+                grid-row:3;
+                margin : 30px 0 0 0;
+                
+            }
+            .submitform>input{
+                font-family:  'Nanum Gothic', sans-serif;
+                cursor : pointer;
+                border : 0;
+                color : white;
+                background-color : orangered;
+                width : 100px;
+                height : 20px;
+            }
+            .link{
+                margin : 25px 0;
+            }
+            .link > a{
+                font-family:  'Black Han Sans', sans-serif;
+                font-size : 30px; 
+                text-decoration: none;
+                color : black;
+            }
+        </style>
+    </head>
+    <body>
+        <center>
+            <div class="title">
+                <p style= "color:cadetblue; display :inline-block;">동작구</p>
+                <p style= "color:orangered; display : inline-block;">맥도날드</p>
+                <p style= "display : inline-block;">주문현황</p>
+            </div>
+            <hr>
+            <section class="menu">
+                <nav class="menuImg">
+                    <ul class="menuImgUI">
+                        <li class="menu-item">
+                                <img src="https://www.mcdonalds.co.kr/upload/product/pcList/1583730613945.png" width ="270">
+                                <p>빅맥 세트 <br> 4900원</p>
+                        </li>
+                        <li class="menu-item">
+                            <img src="https://www.mcdonalds.co.kr/upload/product/pcList/1583730668411.png"width ="270">
+                            <p>맥스파이시 상하이버거 세트 <br>4900원</p>
+                        </li>
+                        <li class="menu-item">
+                            <img src="https://www.mcdonalds.co.kr/upload/product/pcList/1599120019760.png"width ="270">
+                            <p>1955버거 세트 <br>7000원</p>
+                        </li>
+                        <li class="menu-item">
+                            <img src="https://www.mcdonalds.co.kr/upload/product/pcList/1583730764292.png"width ="270">
+                            <p>슈슈버거 세트 <br>5900원</p>
+                        </li>
+                        <li class="menu-item">
+                            <img src="https://www.mcdonalds.co.kr/upload/product/pcList/1583730466187.png"width ="270">
+                            <p>베이컨 토마토 디럭스 세트<br> 6800원</p>
+                        </li>
+                    </ul>
+                </nav>
+            </section>
+            <hr>
+            <section class="order">
+                <p style="font-family:  'Black Han Sans', sans-serif;
+                font-size : 30px; margin:15px;">주문 추가하기</p>
+                <form class="orderform" name="PHP" method=post action="mcdonald.php">
+                    <div class="realform">
+                        점포명 <select name="store" id="store">
+                            <option value="숭실대점">숭실대점</option>
+                            <option value="노량진점">노량진점</option>
+                            <option value="중앙대점">중앙대점</option>
+                            <option value="이수점">이수점</option>
+                        </select>
+                        날짜 <input type="datetime-local" name="orderTime">
+                        메뉴명 <select name="menu_name" id="menu_name">
+                            <option value="빅맥세트">빅맥세트</option>
+                            <option value="맥스파이시상하이버거세트">맥스파이시상하이버거세트</option>
+                            <option value="1955버거세트">1955버거세트</option>
+                            <option value="슈슈버거세트">슈슈버거세트</option>
+                            <option value="베이컨토마토디럭스세트">베이컨토마토디럭스세트</option>
+                        </select>
+                        개수 <input type="number" name="quantity" min="1" max="100">
+                    </div>
+                    <div class="addmenu">   
+                        <p style="font-family:  'Black Han Sans', sans-serif;
+                    font-size : 20px; margin:1px;">메뉴 추가</p>
+                        <select name="menu_name1" id="menu_name1">
+                            <option value="빅맥세트">빅맥세트</option>
+                            <option value="맥스파이시상하이버거세트">맥스파이시상하이버거세트</option>
+                            <option value="1955버거세트">1955버거세트</option>
+                            <option value="슈슈버거세트">슈슈버거세트</option>
+                            <option value="베이컨토마토디럭스세트">베이컨토마토디럭스세트</option>
+                        </select>
+                        개수 <input type="number" name="quantity1" min="1" max="100">
+                    </div>
+                    <div class="submitform">
+                        <input type=submit value="주문 추가">
+                        <input type=reset value="취소">
+                    </div>
+                </form>
+            </section>
+            <hr>
+            <section class="link">
+                <a href="mcdonald.php">현재 주문현황 보러가기</a>
+            </section>
+        </center>
+    </body>
+</html>

@@ -1,0 +1,36 @@
+<설계 방법>
+1. main.cpp에서 results값이 kClosest에서 반환된 값이란 걸 우선 파악하여 kClosest에 정답이 반환될 수 있게 설계한다.
+2. 내장 라이브러리에 있는 pair를 사용해 keypoint와 points의 거리를 계산한 값과 그 거리와 points의 index를 연결한다. (first=거리, second=points의 index)
+3. 내장 라이브러리에 있는 sort를 사용하여 거리가 짧은 순으로 정렬한다.
+4. 중복되는 거리가 있으면 랜덤한 값을 출력할 수 있도록 index 값을 뽑아낸다.
+	4-1. K<points.size일 때는 해당 index와 그 다음 index의 first(=거리)를 비교
+		- 같으면 중복되는 거리가 있음 ->랜덤한 값을 뽑아주기 위하여 1차원 randomIndex 벡터를 생성하여 해당 index를 담아줌. 계속해서 다음 거리값과 비교.
+		- 다르면 중복되는 거리가 없는 것이므로 다음 거리값과 비교할 필요가 없음. 해당 index값 randomIndex에 넣어주고 거리값 비교하는 것 멈춤.
+		   ->randomIndex의 크기만큼 rand()의 범위를 설정해주고 randomIndex[rand()%randomIndex.size()] return.
+	4-2. K=points.size일 때는 정렬된 pair의 마지막 index return.
+5. 결과를 담는 2차원 벡터를 생성하고 벡터에 points[index] 값을 넣어 반환한다.
+6. 반환한 벡터를 출력한다.
+
+<correctness>
+두 점 사이의 거리와 points의 index를 pair로 연결하고 이를 sort하면 거리가 가까운 순으로 정렬이 된다. (정렬의 correctness 생략) 이 때 연결된 pair에서 K-1번째 원소를 뽑아내면 그것이 points의 K-1번째 index가 되고, points[index] 값이 K번째로 가까운 좌표가 된다.
+
+[두 점 사이의 거리와 points를 연결했을 때 pair로 잘 연결되는가?] = yes
+
+Loop invariant : i번째 loop가 끝나면 points[i]와 keypoint 사이의 거리와 i가 i번째 pair를 이룸. 
+
+Inductive Hypothesis : i번째 loop가 끝났을 때 invariant가 성립한다면 i+1번째 loop가 끝났을 때도 성립한다. 
+
+base : i=0 이면 0번째 points와 keypoint사이의 거리와 0을 비어있는 pair에 push 해주므로 0번째 pair에 원소가 추가된다. = TRUE
+
+inductive step : i번째 loop에선 points[i]와 keypoint 사이의 거리와 i를 push_back 해주고, 이 push_back함수는 벡터의 제일 마지막에 원소를 추가하는 함수다. 즉, i번째 loop가 끝나면 i-1개의 원소를 갖고 있던 벡터에 원소를 추가해주는 것이므로 i번째 pair를 이룬다. (i+1)번째 loop에서도 i개의 원소를 갖고 있던 pair 에 원소를 추가하는 것이므로 i+1번째 pair를 이룬다. =TRUE
+
+conclusion : 모든 루프가 종료되었을 때 points[i]와 keypoint 사이의 거리와 i가 i번째 pair를 이루므로 loop invariant를 만족시킨다.
+
+[pair의 K-1번째 원소가 points의 K-1번째 index 인가?] = yes
+위의 질문의 loop invariant가 증명되었으므로 i번째 pair의 원소에 points의 i번째 index가 있다.
+
+<efficiency>
+kClosest 안의 for문에서 최대 n번 연산
+forResult 안의 for문에서 최대 n번 연산
+sort 함수는 quick sort 알고리즘을 바탕으로 만들어졌으므로 시간복잡도는 O(nlogn)
+그러므로 전체코드의 시간복잡도는 O(nlogn)
